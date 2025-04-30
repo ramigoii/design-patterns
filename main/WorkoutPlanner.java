@@ -15,6 +15,9 @@ import observer.User;
 import singleton.TrainingManager;
 import strategy.TrainingFactory;
 import strategy.TrainingStrategy;
+import TemplateMethod.WorkoutSession;
+import TemplateMethod.CardioWorkoutSession;
+import TemplateMethod.StrengthWorkoutSession;
 
 public class WorkoutPlanner {
     private static TrainingInvoker invoker = new TrainingInvoker();
@@ -75,6 +78,16 @@ public class WorkoutPlanner {
         adapter.startTraining();
         adapter.addTraining("Силовая тренировка по старой системе");
         adapter.stopTraining();
+
+        //Template Method Pattern
+        System.out.println("\n📋 Template Method Pattern:");
+
+        WorkoutSession cardioSession = new CardioWorkoutSession();
+        cardioSession.performWorkout();
+
+        WorkoutSession strengthSession = new StrengthWorkoutSession();
+        strengthSession.performWorkout();
+
 
         System.out.println("\n=== ✅ Workout Planner Finished ===");
     }
