@@ -1,11 +1,12 @@
 package command;
+import composite.TrainingComponent;
 import core.TrainingProgram;
 
 public class RemoveTrainingCommand implements TrainingCommand {
     private TrainingProgram program;
-    private String training;
+    private TrainingComponent training;
 
-    public RemoveTrainingCommand(TrainingProgram program, String training) {
+    public RemoveTrainingCommand(TrainingProgram program, TrainingComponent training) {
         this.program = program;
         this.training = training;
     }

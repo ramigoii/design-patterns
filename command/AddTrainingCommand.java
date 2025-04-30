@@ -1,12 +1,12 @@
 package command;
+import composite.TrainingComponent;
 import core.TrainingProgram;
-
 
 public class AddTrainingCommand implements TrainingCommand {
     private TrainingProgram program;
-    private String training;
+    private TrainingComponent training;
 
-    public AddTrainingCommand(TrainingProgram program, String training) {
+    public AddTrainingCommand(TrainingProgram program, TrainingComponent training) {
         this.program = program;
         this.training = training;
     }

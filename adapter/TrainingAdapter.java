@@ -1,7 +1,8 @@
 package adapter;
 
-import adapter.OldFitnessTracker;
+import composite.TrainingComponent;
 import core.TrainingProgram;
+import adapter.OldFitnessTracker;
 
 public class TrainingAdapter extends TrainingProgram {
     private final OldFitnessTracker oldTracker;
@@ -22,8 +23,8 @@ public class TrainingAdapter extends TrainingProgram {
     }
 
     @Override
-    public void addTraining(String training) {
-        oldTracker.track("Adding training: " + training);
+    public void addTraining(TrainingComponent training) {
+        oldTracker.track("Adding training: " + training.getName());
     }
 
     @Override

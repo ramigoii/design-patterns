@@ -6,10 +6,13 @@ import command.AddTrainingCommand;
 import command.StartTrainingCommand;
 import command.TrainingCommand;
 import command.TrainingInvoker;
+import composite.Exercise;
+import composite.Workout;
 import core.TrainingProgram;
 import decorator.CoolDownDecorator;
 import decorator.WarmUpDecorator;
 import facade.WorkoutFacade;
+import iterator.Iterator;
 import observer.Observer;
 import observer.User;
 import singleton.TrainingManager;
@@ -27,7 +30,7 @@ public class WorkoutPlanner {
         System.out.println("=== 🏋️‍♀️ Workout Planner Started ===\n");
 
         // ✅ Command Pattern
-        TrainingCommand addPushups = new AddTrainingCommand(commandProgram, "Отжимания");
+        TrainingCommand addPushups = new AddTrainingCommand(commandProgram, new Exercise("Push-Ups"));
         invoker.setCommand(addPushups);
         invoker.executeCommand();
 
@@ -45,7 +48,7 @@ public class WorkoutPlanner {
         strength.train();
         hybrid.train();
 
-        // ✅ observer.Observer Pattern
+        // ✅ Observer Pattern
         TrainingProgram observerProgram = new TrainingProgram("Summer Fitness Challenge");
         Observer user1 = new User("Rami");
         Observer user2 = new User("Akzhan");
@@ -54,7 +57,7 @@ public class WorkoutPlanner {
         observerProgram.addObserver(user2);
 
         System.out.println("\n👀 Notifying users about the new training program:");
-        observerProgram.addTraining("Интервальная тренировка"); // will auto-notify
+        observerProgram.addTraining(new Exercise("Interval Training"));
 
         // ✅ Decorator Pattern
         TrainingStrategy decoratedWorkout = new WarmUpDecorator(new CoolDownDecorator(TrainingFactory.createTraining("strength")));
@@ -76,18 +79,41 @@ public class WorkoutPlanner {
         OldFitnessTracker legacy = new OldFitnessTracker();
         TrainingProgram adapter = new TrainingAdapter(legacy);
         adapter.startTraining();
-        adapter.addTraining("Силовая тренировка по старой системе");
+        adapter.addTraining(new Exercise("Legacy Strength Training"));
         adapter.stopTraining();
 
-        //Template Method Pattern
+        // ✅ Template Method Pattern
         System.out.println("\n📋 Template Method Pattern:");
-
         WorkoutSession cardioSession = new CardioWorkoutSession();
         cardioSession.performWorkout();
-
         WorkoutSession strengthSession = new StrengthWorkoutSession();
         strengthSession.performWorkout();
 
+        // ✅ Iterator Pattern
+        System.out.println("\n🔄 Using Iterator Pattern:");
+        Iterator<String> iterator = commandProgram.createIterator();
+        while (iterator.hasNext()) {
+            System.out.println("Training: " + iterator.next());
+        }
+
+        // ✅ Composite Pattern
+        System.out.println("\n🌳 Using Composite Pattern:");
+        Workout legDay = new Workout("Leg Day");
+        legDay.add(new Exercise("Squats"));
+        legDay.add(new Exercise("Lunges"));
+        Workout upperBody = new Workout("Upper Body");
+        upperBody.add(new Exercise("Push-Ups"));
+        upperBody.add(new Exercise("Pull-Ups"));
+        commandProgram.addTraining(legDay);
+        commandProgram.addTraining(upperBody);
+        commandProgram.showTrainings();
+
+        // ✅ State Pattern
+        System.out.println("\n🔄 Using State Pattern:");
+        commandProgram.startTraining();
+        commandProgram.pauseTraining();
+        commandProgram.resumeTraining();
+        commandProgram.stopTraining();
 
         System.out.println("\n=== ✅ Workout Planner Finished ===");
     }

@@ -1,16 +1,18 @@
 package facade;
+import composite.Exercise;
 import core.TrainingProgram;
+
 public class WorkoutFacade {
     private TrainingProgram program;
 
     public WorkoutFacade() {
         this.program = new TrainingProgram("Full Body Workout");
 
-        // Setup training routine
-        program.addTraining("Warm-Up");
-        program.addTraining("Cardio Session");
-        program.addTraining("Strength Training");
-        program.addTraining("Cool Down");
+        // Setup training routine with TrainingComponent objects
+        program.addTraining(new Exercise("Warm-Up"));
+        program.addTraining(new Exercise("Cardio Session"));
+        program.addTraining(new Exercise("Strength Training"));
+        program.addTraining(new Exercise("Cool Down"));
     }
 
     public void startWorkout() {
@@ -24,7 +26,7 @@ public class WorkoutFacade {
         System.out.println("🏁 Завершение тренировки через фасад.");
     }
 
-    // Optional getter if you want access to the program object
+    // Optional getter for the program object
     public TrainingProgram getProgram() {
         return program;
     }
