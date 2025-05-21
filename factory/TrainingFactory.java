@@ -1,8 +1,9 @@
-package strategy;
+package factory;
 
 import strategy.CardioTraining;
 import strategy.HybridTraining;
 import strategy.StrengthTraining;
+import strategy.TrainingStrategy;
 
 public class TrainingFactory {
     public static TrainingStrategy createTraining(String type) {

@@ -26,7 +26,6 @@ public class WorkoutFacade {
         System.out.println("🏁 Завершение тренировки через фасад.");
     }
 
-    // Optional getter for the program object
     public TrainingProgram getProgram() {
         return program;
     }

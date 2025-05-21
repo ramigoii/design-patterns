@@ -1,4 +1,3 @@
-// Package: composite
 package composite;
 
 public interface TrainingComponent {

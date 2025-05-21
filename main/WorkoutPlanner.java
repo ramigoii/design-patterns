@@ -16,7 +16,7 @@ import iterator.Iterator;
 import observer.Observer;
 import observer.User;
 import singleton.TrainingManager;
-import strategy.TrainingFactory;
+import factory.TrainingFactory;
 import strategy.TrainingStrategy;
 import TemplateMethod.WorkoutSession;
 import TemplateMethod.CardioWorkoutSession;
